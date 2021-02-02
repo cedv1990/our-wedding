@@ -6,7 +6,7 @@ export const WelcomeScreen = () => {
     const dispatch = useDispatch();
 
     const handleClickMap = () => {
-        window.open('https://goo.gl/maps/yPgs66VkgaipSVf37', '_blank');
+        window.open('https://goo.gl/maps/XkoCP9FdpzKGYFE37', '_blank');
     };
 
     const handleShowForm = () => {
@@ -19,7 +19,7 @@ export const WelcomeScreen = () => {
     return (
         <aside className="container animate__animated animate__backInLeft animate__faster">
             <div className="notice">
-                ¡Nos Casamos!
+                ¡Bienvenid<small>@</small> a nuestra boda!
             </div>
             <div className="couple-names">
                 Carlos

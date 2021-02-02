@@ -26,7 +26,7 @@ html, body{
     background-image: linear-gradient(to bottom, rgba(113, 113, 113, 0.6) 0%, rgba(60, 60, 60, 0.7) 100%), url('../../assets/bg.JPG');
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: scroll;
+    background-attachment: fixed;
     background-size: cover;
 
     @media (max-width: 520px) {

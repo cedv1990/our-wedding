@@ -44,7 +44,7 @@ export const WelcomeScreen = () => {
                 className="location"
                 onClick={ handleClickMap }
             >
-                <i class="fas fa-map-marked-alt"></i> Hacienda San Sebastián, Kilómetro 3, vía El Rosal - Subachoque
+                <i className="fas fa-map-marked-alt"></i> Hacienda San Sebastián, Kilómetro 3, vía El Rosal - Subachoque
             </div>
             <div className="buttons">
                 <button onClick={ handleShowForm }>

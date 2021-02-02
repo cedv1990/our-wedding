@@ -76,7 +76,7 @@ export const ConfirmScreen = () => {
                     Buscar
                 </button>
                 <span className="error" style={ { display: msgError == null && 'none' } }>
-                    <i class="fas fa-exclamation-triangle"></i> { msgError }
+                    <i className="fas fa-exclamation-triangle"></i> { msgError }
                 </span>
             </form>
             <button onClick={ handleBackClick }>

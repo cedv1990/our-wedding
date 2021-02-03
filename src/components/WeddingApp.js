@@ -5,7 +5,7 @@ import { ConfirmScreen } from './ConfirmScreen';
 import { WelcomeScreen } from './WelcomeScreen';
 
 export const WeddingApp = () => {
-    const guestId = window.location.pathname.split('/invite/').join('').split('/').join('');
+    const guestId = window.location.search.split('?id=').join('').split('/').join('');
 
     const dispatch = useDispatch();
 

@@ -1,20 +1,21 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setError, removeError, setHideForm } from '../actions/ui';
+import { setHideForm } from '../actions/ui';
 import { useForm } from '../hooks/useForm';
+import { startConfirm } from '../actions/guests';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
+
 
 export const ConfirmScreen = () => {
 
     const dispatch = useDispatch();
 
-    const [ formValues, handleInputChange ] = useForm({
-        name: '',
-        surname: ''
-    });
-
     const { loading, msgError } = useSelector(state => state.ui);
 
-    const { name, surname } = formValues;
+    const { guest } = useSelector(state => state.guests);
+
+    const { first_name, middle_name, last_name, second_last_name, goes, id } = guest;
 
     const handleBackClick = () => {
         const container = document.querySelector('.confirm-container');
@@ -23,62 +24,38 @@ export const ConfirmScreen = () => {
         setTimeout(() => dispatch( setHideForm() ), 200);
     };
 
-    const handleSearch = e => {
-        e.preventDefault();
+    const [ values, handleChange ] = useForm({ goes });
+    const { goes: checked } = values;
+    
+    const guestId = useRef( guest.goes );
 
-        if (isFormValid()) {
-
+    useEffect(() => {
+        if (checked !== guestId.current) {
+            dispatch( startConfirm(guest.id, { ...guest, goes: checked }) );
+            guestId.current = checked;
         }
-    };
-
-    const isFormValid = () => {
-        if ( name.trim().length === 0 && surname.trim().length === 0 ) {
-            dispatch(setError('Debes diligenciar al menos un campo'));
-            return false;
-        }
-        dispatch(removeError());
-        return true;
-    };
+    }, [ guest, checked, loading, dispatch ]);
 
     return (
         <aside className="confirm-container animate__animated animate__backInRight animate__faster">
             <div className="description">
-                <h2>¿Nos acompañas?</h2>
-                <span>Para confirmar tu asistencia, escribe tu nombre y apellido (o uno de los dos) y dale Buscar. Aparecerán los nombres que coincidan y solo debes decir si vas o no a nuestra boda.</span>
+                <h2>¿Nos acompañas { first_name || middle_name }?</h2>
+                <span>Para confirmar tu asistencia, solo debes decir si vas o no a nuestra boda.</span>
                 <span className="icon">🥰</span>
             </div>
             <hr />
-            <form onSubmit={ handleSearch }>
-                <div>
-                    <input
-                        type="text"
-                        name="name"
-                        placeholder="Nombre(s)"
-                        autoComplete="off"
-                        value={ name }
-                        onChange={ handleInputChange }
-                        disabled={ loading }
-                    />
-                    <input
-                        type="text"
-                        name="surname"
-                        placeholder="Apellido(s)"
-                        autoComplete="off"
-                        value={ surname }
-                        onChange={ handleInputChange }
-                        disabled={ loading }
-                    />
-                </div>
-                <button
-                    type="submit"
-                    disabled={ loading }
-                >
-                    Buscar
-                </button>
-                <span className="error" style={ { display: msgError == null && 'none' } }>
-                    <i className="fas fa-exclamation-triangle"></i> { msgError }
-                </span>
+            <form>
+                <span className="name">{ `${`${ first_name } ${ middle_name }`.trim()} ${`${ last_name } ${ second_last_name }`.trim()}` }</span>
+                <FormControlLabel label={ checked ? '😊' : '🥺' } title="Clic para cambiar" control={<Switch checked={ checked } onChange={ handleChange } name="goes" color={ 'secondary' } />} disabled={ loading } />
             </form>
+            <div className="message">
+            {
+                checked ?
+                'Gracias por acompañarnos! Recuerda... bla bla bla'
+                :
+                'Si no nos puedes acompañar... bla bla'
+            }
+            </div>
             <button onClick={ handleBackClick }>
                 Regresar
             </button>

@@ -40,53 +40,45 @@
 
     form {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
         width: 80vw;
         padding: 10px;
         border-radius: 10px;
         background-color: rgba(113, 113, 113, 0.5);
         align-items: center;
 
+        .name {
+            display: flex;
+            align-items: center;
+        }
+
         @media (max-width: 650px) {
             align-items: unset;
         }
+    }
 
-        input, button, span {
-            margin: 10px;
-        }
-
-        button {
-            background-color: #9f69a7;
-
-            transition: all .3s ease;
-
-            &:hover {
-                background-color: darken($color: #9f69a7, $amount: 5);
-            }
-        }
-
-        input {
-            flex: 1;
-        }
-
-        div {
-            display: flex;
-            flex-direction: row;
-            width: 100%;
-
-            @media (max-width: 650px) {
-                flex-direction: column;
-            }
-        }
-
-        .error {
-            color: lighten($color: red, $amount: 20);
-        }
+    .message {
+        text-align: center;
+        width: 80vw;
     }
 
     @media (min-width: 1000px) {
         form {
-            width: 60vw;
+            width: 50vw;
         }
     }
+}
+
+.MuiSwitch-colorSecondary.Mui-checked + .MuiSwitch-track {
+    background-color: #4edb84 !important;
+}
+
+.MuiSwitch-colorSecondary.Mui-checked {
+    color: #1db858 !important;
+}
+
+span.MuiTypography-root.MuiFormControlLabel-label.MuiTypography-body1{
+    font-size: 1.5rem;
 }

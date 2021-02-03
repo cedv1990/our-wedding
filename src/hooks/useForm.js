@@ -6,9 +6,9 @@ export const useForm = ( initialState = {} ) => {
 
     const reset = (newFormState = initialState) => setValues( newFormState );
 
-    const handleInputChange = ({ target: { name, value } }) => setValues({
+    const handleInputChange = ({ target: { name, checked } }) => setValues({
         ...values,
-        [ name ]: value
+        [ name ]: checked
     });
 
     return [

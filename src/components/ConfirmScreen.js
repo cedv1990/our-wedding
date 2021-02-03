@@ -1,21 +1,20 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setHideForm } from '../actions/ui';
-import { useForm } from '../hooks/useForm';
-import { startConfirm } from '../actions/guests';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import { startConfirm } from '../actions/family';
 
 
 export const ConfirmScreen = () => {
 
     const dispatch = useDispatch();
 
-    const { loading, msgError } = useSelector(state => state.ui);
+    const { loading } = useSelector(state => state.ui);
 
-    const { guest } = useSelector(state => state.guests);
+    const { family } = useSelector(state => state.family);
 
-    const { first_name, middle_name, last_name, second_last_name, goes, id } = guest;
+    const { id, family_name, guests } = family;
 
     const handleBackClick = () => {
         const container = document.querySelector('.confirm-container');
@@ -24,39 +23,37 @@ export const ConfirmScreen = () => {
         setTimeout(() => dispatch( setHideForm() ), 200);
     };
 
-    const [ values, handleChange ] = useForm({ goes });
-    const { goes: checked } = values;
-    
-    const guestId = useRef( guest.goes );
-
-    useEffect(() => {
-        if (checked !== guestId.current) {
-            dispatch( startConfirm(guest.id, { ...guest, goes: checked }) );
-            guestId.current = checked;
-        }
-    }, [ guest, checked, loading, dispatch ]);
+    const handleOnChange = guestId => e => {
+        dispatch( startConfirm(id, guestId, e.target.checked) );
+    };
 
     return (
         <aside className="confirm-container animate__animated animate__backInRight animate__faster">
             <div className="description">
-                <h2>¿Nos acompañas { first_name || middle_name }?</h2>
-                <span>Para confirmar tu asistencia, solo debes decir si vas o no a nuestra boda.</span>
+                <h2>{ family_name }, ¿Nos acompaña{ guests.length > 1 ? 'n' : 's' }?</h2>
+                <span>Para confirmar { guests.length > 1 ? 'la' : 'tu' } asistencia, solo debes decir { guests.length > 1 ? 'quién va' : 'si vas' } o no a nuestra boda.</span>
                 <span className="icon">🥰</span>
             </div>
             <hr />
             <form>
-                <span className="name">{ `${`${ first_name } ${ middle_name }`.trim()} ${`${ last_name } ${ second_last_name }`.trim()}` }</span>
-                <FormControlLabel label={ checked ? '😊' : '🥺' } title="Clic para cambiar" control={<Switch checked={ checked } onChange={ handleChange } name="goes" color={ 'secondary' } />} disabled={ loading } />
+                {
+                    guests.map(({ first_name, middle_name, last_name, second_last_name, goes, id }, i) => (
+                        <div key={ i }>
+                            <span className="name">{ `${`${ first_name } ${ middle_name }`.trim()} ${`${ last_name } ${ second_last_name }`.trim()}` }</span>
+                            <FormControlLabel label={ goes ? '😊' : '🥺' } title="Clic para cambiar" control={<Switch onChange={ handleOnChange(id) } checked={ goes } name="goes" color={ 'secondary' } />} disabled={ loading } />
+                        </div>
+                    ))
+                }
             </form>
-            <div className="message">
+            {/* <div className="message">
             {
                 checked ?
                 'Gracias por acompañarnos! Recuerda... bla bla bla'
                 :
                 'Si no nos puedes acompañar... bla bla'
             }
-            </div>
-            <button onClick={ handleBackClick }>
+            </div> */}
+            <button onClick={ handleBackClick } disabled={ loading }>
                 Regresar
             </button>
         </aside>

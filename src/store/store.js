@@ -1,11 +1,11 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import { guestsReducer } from '../reducers/guestsReducer';
+import { familyReducer } from '../reducers/familyReducer';
 import { uiReducer } from '../reducers/uiReducer';
 
 const reducers = combineReducers({
     ui: uiReducer,
-    guests: guestsReducer,
+    family: familyReducer,
 });
 
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;

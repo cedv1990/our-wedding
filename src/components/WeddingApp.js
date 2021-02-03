@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { startLoadingGuestData } from '../actions/guests';
+import { startLoadingFamilyData } from '../actions/family';
+
 import { ConfirmScreen } from './ConfirmScreen';
+import { Loader } from './Loader';
 import { WelcomeScreen } from './WelcomeScreen';
 
 export const WeddingApp = () => {
@@ -13,12 +15,22 @@ export const WeddingApp = () => {
 
     useEffect(() => {
         if (guestId !== '')
-            dispatch( startLoadingGuestData(guestId) );
+            dispatch( startLoadingFamilyData(guestId) );
     }, [ dispatch, guestId ]);
 
     if (guestId !== '') {
-        return showForm ? <ConfirmScreen /> : <WelcomeScreen />;
+        return (
+            <> 
+                <Loader />
+                {(showForm ? <ConfirmScreen /> : <WelcomeScreen />)}
+            </>
+        );
     }
 
-    return <WelcomeScreen />;
+    return (
+        <>
+            <Loader />
+            <WelcomeScreen />
+        </>
+    );
 }

@@ -60,6 +60,11 @@ button {
         color: darken($color: white, $amount: 10);
         background-color: darken($color: #6d498f, $amount: 5);
     }
+
+    &:disabled {
+        color: darken($color: white, $amount: 20);
+        background-color: darken($color: #CCCCCC, $amount: 40);
+    }
 }
 
 input {

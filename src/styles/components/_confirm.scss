@@ -39,15 +39,19 @@
     }
 
     form {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
         width: 80vw;
-        padding: 10px;
-        border-radius: 10px;
-        background-color: rgba(113, 113, 113, 0.5);
-        align-items: center;
+
+        > div {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: rgba(113, 113, 113, 0.5);
+            align-items: center;
+            margin: 10px;
+        }
 
         .name {
             display: flex;

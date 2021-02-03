@@ -9,7 +9,9 @@ export const WelcomeScreen = () => {
         window.open('https://goo.gl/maps/XkoCP9FdpzKGYFE37', '_blank');
     }
 
-    const { guest } = useSelector(state => state.guests);
+    const { family } = useSelector(state => state.family);
+
+    const { loading } = useSelector(state => state.ui);
 
     const handleShowForm = () => {
         const container = document.querySelector('.container');
@@ -18,16 +20,16 @@ export const WelcomeScreen = () => {
         setTimeout(() => dispatch( setShowForm() ), 200);
     };
 
-    const valid = Object.keys(guest).length;
+    const valid = Object.keys(family).length;
 
     if (valid) {
-        document.title = `¡Bienveni@ ${ guest.first_name || guest.middle_name }!`;
+        document.title = `¡Bienveni@ ${ family.family_name }!`;
     }
 
     return (
         <aside className="container animate__animated animate__backInLeft animate__faster">
             <div className="notice">
-                ¡Bienvenid<small>@</small> { guest.first_name || guest.middle_name } a nuestra boda!
+                ¡Hola { family.family_name }!
             </div>
             <div className="couple-names">
                 Carlos
@@ -58,7 +60,7 @@ export const WelcomeScreen = () => {
                 valid > 0 && 
                 (
                     <div className="buttons">
-                        <button onClick={ handleShowForm }>
+                        <button onClick={ handleShowForm } disabled={ loading }>
                             Confirmar asistencia
                         </button>
                     </div>

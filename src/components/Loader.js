@@ -7,7 +7,7 @@ export const Loader = () => {
     const className = !loading ? 'animate__animated animate__fadeOut animate__faster' : '';
 
     setTimeout(() => {
-        document.querySelector('.loader').className = `loader ${ className }`;
+        document.querySelector('.loader').className = `loader ${ className } no-pointer`;
     }, 2000);
 
     return (

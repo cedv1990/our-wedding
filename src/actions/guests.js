@@ -18,7 +18,7 @@ export const setGuests = guest => ({
 export const startConfirm = (guestId, guest) => async dispatch => {
     dispatch( startLoading() );
     const guestToFS = { ...guest };
-    await db.doc(`guests/${guestId}`).update(guestToFS);
+    await db.doc(`guests/${guestId}`).update({ goes: guestToFS.goes });
     dispatch(setGuests(guestToFS));
     dispatch( finishLoading() );
 };

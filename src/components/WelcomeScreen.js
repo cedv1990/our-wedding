@@ -29,7 +29,7 @@ export const WelcomeScreen = () => {
     return (
         <aside className="container animate__animated animate__backInLeft animate__faster">
             <div className="notice">
-                ¡Hola { family.family_name }!
+                ¡{ valid ? `Hola ${ family.family_name }` : (<>Bienvenid<small>@</small> a nuestra boda</>) }!
             </div>
             <div className="couple-names">
                 Carlos

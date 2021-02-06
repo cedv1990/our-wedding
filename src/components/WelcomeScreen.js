@@ -52,7 +52,7 @@ export const WelcomeScreen = () => {
                 Mónica
             </div>
             <div className="words">
-                "La vida una a las personas adecuadas en el momento adecuado.<br />Que este sea nuestro destino: amar, vivir y empezar cada día juntos"
+                "La vida une a las personas adecuadas en el momento adecuado.<br />Que este sea nuestro destino: amar, vivir y empezar cada día juntos"
             </div>
             <div className="date">
                 <div className="cute">Domingo</div>

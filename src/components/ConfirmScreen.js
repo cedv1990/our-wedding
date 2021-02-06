@@ -89,6 +89,7 @@ export const ConfirmScreen = () => {
                             <br />
                             {allaNosVeremos}
                             <br />
+                            <br />
                             {`Es una pena que ${ textUnconfirmedGuests } no nos acompañe${ unconfirmedGuests.length !== 1 ? 'n' : '' } 🥺, pero sabemos 
                             que podemos contar con${ unconfirmedGuests.length === 1 ? 'tigo' : ' ustedes' } para cualquier otra ocasión 💪🏻`}
                         </>

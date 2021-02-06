@@ -27,6 +27,22 @@ export const ConfirmScreen = () => {
         dispatch( startConfirm(id, guestId, e.target.checked) );
     };
 
+    const confirmedGuests = guests.filter(g => g.goes);
+    const unconfirmedGuests = guests.filter(g => !g.goes);
+
+    const formatText = t => {
+        if (t.length > 1) {
+            return t.slice(0, t.length - 1).join(', ') + ' y ' + t[t.length - 1];
+        }
+        return t[0];
+    };
+
+    const textConfirmedGuests = formatText(confirmedGuests.map(c => c.nickname));
+    
+    const textUnconfirmedGuests = formatText(unconfirmedGuests.map(c => c.nickname));
+
+    const allaNosVeremos = (<><br />{'¡Nos vemos el 25 de Julio 😋!'}<br />{'Yo veré, la mejor pinta ese día 🕺🏻💃🏻🤭'}</>);
+
     return (
         <aside className="confirm-container animate__animated animate__backInRight animate__faster">
             <div className="description">
@@ -45,14 +61,41 @@ export const ConfirmScreen = () => {
                     ))
                 }
             </form>
-            {/* <div className="message">
+            <div className="message">
             {
-                checked ?
-                'Gracias por acompañarnos! Recuerda... bla bla bla'
+                guests.length === confirmedGuests.length
+                ?
+                    (
+                        <>
+                            {`¡Gracias ${ textConfirmedGuests } por acompañarnos 🤗!`}
+                            <br />
+                            {
+                                `Estamos ansiosos porque este día llegue 🥰 y tener el placer de contar 
+                                con ${ confirmedGuests.length === 1 ? 'tu' : 'su' } compañía en este momento tan especial para nosotros 😃`
+                            }
+                            <br />
+                            {allaNosVeremos}
+                        </>
+                    )
                 :
-                'Si no nos puedes acompañar... bla bla'
+                (
+                    confirmedGuests.length === 0
+                    ?
+                    `Qué mal que no nos acompaña${ guests.length === 1 ? 's' : 'n' } 😕, pero sabemos que podemos contar con${ guests.length === 1 ? 'tigo' : ' ustedes' } para cualquier otra ocasión 💪🏻`
+                    :
+                    (
+                        <>
+                            {`¡Gracias ${ textConfirmedGuests } por acompañarnos!`}
+                            <br />
+                            {allaNosVeremos}
+                            <br />
+                            {`Es una pena que ${ textUnconfirmedGuests } no nos acompañe${ unconfirmedGuests.length !== 1 ? 'n' : '' } 🥺, pero sabemos 
+                            que podemos contar con${ unconfirmedGuests.length === 1 ? 'tigo' : ' ustedes' } para cualquier otra ocasión 💪🏻`}
+                        </>
+                    )
+                )
             }
-            </div> */}
+            </div>
             <button onClick={ handleBackClick } disabled={ loading }>
                 Regresar
             </button>

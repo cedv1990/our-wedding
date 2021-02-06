@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { startLoadingFamilyData } from '../actions/family';
 
 import { ConfirmScreen } from './ConfirmScreen';
+import { Frame } from './Frame';
 import { Loader } from './Loader';
 import { WelcomeScreen } from './WelcomeScreen';
 
@@ -22,6 +23,7 @@ export const WeddingApp = () => {
         return (
             <> 
                 <Loader />
+                <Frame />
                 {(showForm ? <ConfirmScreen /> : <WelcomeScreen />)}
             </>
         );
@@ -30,6 +32,7 @@ export const WeddingApp = () => {
     return (
         <>
             <Loader />
+            <Frame />
             <WelcomeScreen />
         </>
     );

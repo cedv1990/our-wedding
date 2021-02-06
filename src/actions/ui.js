@@ -24,3 +24,7 @@ export const startLoading = () => ({
 export const finishLoading = () => ({
     type: types.finishLoading
 });
+
+export const finishInitialLoading = () => ({
+    type: types.initialLoadingEnded
+});

@@ -1,17 +1,25 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { finishInitialLoading } from '../actions/ui';
 
 export const Loader = () => {
-    const { loading } = useSelector(state => state.ui);
+    const dispatch = useDispatch();
 
-    const className = !loading ? 'animate__animated animate__fadeOut animate__faster' : '';
+    const { loading, initialLoadingEnded } = useSelector(state => state.ui);
 
-    setTimeout(() => {
-        document.querySelector('.loader').className = `loader ${ className } no-pointer`;
-    }, 2000);
+    if (!initialLoadingEnded) {
+        setTimeout(() => {
+            const className = !loading ? 'animate__animated animate__fadeOut animate__faster' : '';
+            const loader = document.querySelector('.loader');
+            if (initialLoadingEnded || !loader) return;
+            loader.className = `loader ${ className } no-pointer`;
+            dispatch( finishInitialLoading() );
+        }, 2000);
 
-    return (
-        <div className='loader'>
-        </div>
-    )
+        return (
+            <div className='loader'>
+            </div>
+        );
+    }
+    return (<></>);
 }

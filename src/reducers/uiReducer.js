@@ -3,11 +3,17 @@ import { types } from '../types/types';
 const initialState = {
     showForm: false,
     loading: false,
-    msgError: null
+    msgError: null,
+    initialLoadingEnded: false
 };
 
 export const uiReducer = (state = initialState, action) => {
     switch (action.type) {
+        case types.initialLoadingEnded:
+            return {
+                ...state,
+                initialLoadingEnded: true
+            };
         case types.showConfirm:
             return {
                 ...state,

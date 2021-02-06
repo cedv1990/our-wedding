@@ -9,14 +9,19 @@
     margin: 100px 0;
 
     div {
-        // margin: 20px 0;
         text-align: center;
         margin: 10px 0;
     }
 
     .notice {
         font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+
+    .little-words {
         margin-bottom: 40px;
+        max-width: 60vw;
+        font-size: 1.5rem;
     }
 
     .couple-names {

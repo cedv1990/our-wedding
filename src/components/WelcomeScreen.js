@@ -31,6 +31,19 @@ export const WelcomeScreen = () => {
             <div className="notice">
                 ¡{ valid ? `Hola ${ family.family_name }` : (<>Bienvenid<small>@</small> a nuestra boda</>) }!
             </div>
+            {
+                family.guests
+                ?
+                    <div className="little-words">
+                        Nos llena de emoción celebrar nuestra unión junto a { family.guests.length > 1 ? 'ustedes' : 'ti' },
+                        <br />
+                        que { family.guests.length > 1 ? 'son' : 'eres' } especial{ family.guests.length > 1 ? 'es' : '' } para nosotros.
+                    </div>
+                :
+                    <div className="little-words">
+                        Nos llena de emoción celebrar nuestra unión junto a ustedes.
+                    </div>
+            }
             <div className="couple-names">
                 Carlos
                 <br />

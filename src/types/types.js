@@ -8,6 +8,8 @@ export const types = {
     startLoading: '[UI] Start loading',
     finishLoading: '[UI] Finish loading',
 
+    initialLoadingEnded: '[UI] Finish initial loading',
+
     familyLoad: '[FAMILY] load family data',
     
     guestGoesUpdate: '[GUESTS] update family guest if goes'

@@ -17,7 +17,6 @@ export const Principal = () => {
                 <Switch>
                     <Route
                         path="/admin"
-                        exact
                         component={ () => <AdminScreen /> }
                     />
                     <Route

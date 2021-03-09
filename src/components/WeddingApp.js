@@ -6,8 +6,11 @@ import { ConfirmScreen } from './ConfirmScreen';
 import { Frame } from './Frame';
 import { Loader } from './Loader';
 import { WelcomeScreen } from './WelcomeScreen';
+import { AdminScreen } from './AdminScreen';
 
 export const WeddingApp = () => {
+    const isAdmin = window.location.search.split('?admin=').join('').split('/').join('');
+
     const guestId = window.location.search.split('?id=').join('').split('/').join('');
 
     const dispatch = useDispatch();
@@ -19,7 +22,9 @@ export const WeddingApp = () => {
             dispatch( startLoadingFamilyData(guestId) );
     }, [ dispatch, guestId ]);
 
-    if (guestId !== '') {
+    if (isAdmin) {
+        return <AdminScreen />;
+    } else if (guestId !== '') {
         return (
             <> 
                 <Loader />

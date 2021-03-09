@@ -1,5 +1,5 @@
 import { db } from '../database/firebase-config';
-import { loadFamilyData } from '../helpers/loadFamily';
+import { loadFamilyData, loadFamilies } from '../helpers/loadFamily';
 import { types } from '../types/types';
 import { finishLoading, startLoading } from './ui';
 
@@ -28,4 +28,16 @@ export const updateGoes = (guestId, goes) => ({
         guestId,
         goes
     }
+});
+
+export const startLoadingFamiliesData = () => async dispatch => {
+    dispatch( startLoading() );
+    const guests = await loadFamilies();
+    dispatch(setFamilies(guests));
+    dispatch( finishLoading() );
+};
+
+export const setFamilies = guests => ({
+    type: types.familiesLoad,
+    payload: guests
 });

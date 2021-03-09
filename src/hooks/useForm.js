@@ -6,9 +6,9 @@ export const useForm = ( initialState = {} ) => {
 
     const reset = (newFormState = initialState) => setValues( newFormState );
 
-    const handleInputChange = ({ target: { name, checked } }) => setValues({
+    const handleInputChange = ({ target: { name, value } }) => setValues({
         ...values,
-        [ name ]: checked
+        [ name ]: value
     });
 
     return [
@@ -16,5 +16,4 @@ export const useForm = ( initialState = {} ) => {
         handleInputChange,
         reset
     ];
-
 }

@@ -12,5 +12,11 @@ export const types = {
 
     familyLoad: '[FAMILY] load family data',
     
-    guestGoesUpdate: '[GUESTS] update family guest if goes'
+    guestGoesUpdate: '[GUESTS] update family guest if goes',
+
+    familiesLoad: '[FAMILIES] load all guests',
+
+    setCopied: '[Copied] change',
+    setTimeout: '[Timeout] change',
+    setFiltered: '[Filtered] filtered list'
 }

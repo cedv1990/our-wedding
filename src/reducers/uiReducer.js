@@ -4,7 +4,10 @@ const initialState = {
     showForm: false,
     loading: false,
     msgError: null,
-    initialLoadingEnded: false
+    initialLoadingEnded: false,
+    copied: false,
+    timeout: -1,
+    filtered: false
 };
 
 export const uiReducer = (state = initialState, action) => {
@@ -44,6 +47,21 @@ export const uiReducer = (state = initialState, action) => {
                 ...state,
                 loading: false
             };
+        case types.setCopied:
+            return {
+                ...state,
+                copied: action.payload
+            }
+        case types.setTimeout:
+            return {
+                ...state,
+                timeout: action.payload
+            }
+        case types.setFiltered:
+            return {
+                ...state,
+                filtered: action.payload
+            }
         default:
             return state;
     }

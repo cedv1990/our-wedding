@@ -1,7 +1,8 @@
 import { types } from "../types/types";
 
 const initialState = {
-    family: {}
+    family: {},
+    families: []
 };
 
 export const familyReducer = (state = initialState, action) => {
@@ -26,6 +27,12 @@ export const familyReducer = (state = initialState, action) => {
                     ...state.family,
                     guests: [...guests]
                 }
+            };
+
+        case types.familiesLoad:
+            return {
+                ...state,
+                families: action.payload
             };
         default:
             return state;

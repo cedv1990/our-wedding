@@ -96,6 +96,10 @@ $not-goes: rgb(255, 119, 119);
                 padding: 10px;
                 width: calc(50% - 20px);
 
+                &.error {
+                    background-color: transparentize($color: #CCCCCC, $amount: 0.6);
+                }
+
                 &.nobody {
                     background-color: transparentize($color: $not-goes, $amount: 0.6);
                     &:hover {
@@ -118,7 +122,10 @@ $not-goes: rgb(255, 119, 119);
                 }
 
                 border-radius: 5px;
-                cursor: pointer;
+
+                &:not(.error) {
+                    cursor: pointer;
+                }
 
                 h1 {
                     font-weight: bolder;

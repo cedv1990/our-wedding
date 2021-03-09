@@ -78,7 +78,8 @@ export const Guests = ({ families, showCopiedLink }) => {
             </div>
             <div className="admin__guests-container">
             {
-                familiesView
+                familiesView.length > 0
+                && familiesView
                     .map(({ id, familyName, guests }) => (
                         <CopyToClipboard
                             key={ id }
@@ -97,6 +98,7 @@ export const Guests = ({ families, showCopiedLink }) => {
                         </CopyToClipboard>
                     ))
             }
+            { familiesView.length === 0 && <div className="admin__guests-container-row error">😅 No se encontraron invitados por el filtro.</div> }
             </div>
         </>
     );

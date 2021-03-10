@@ -7,11 +7,12 @@ import { Frame } from './Frame';
 import { Loader } from './Loader';
 import { WelcomeScreen } from './WelcomeScreen';
 import { AdminScreen } from './AdminScreen';
+import { extractQueryString } from '../helpers/uri';
 
 export const WeddingApp = () => {
-    const isAdmin = window.location.search.split('?admin=').join('').split('/').join('');
+    const isAdmin = extractQueryString('admin') === 'true';
 
-    const guestId = window.location.search.split('?id=').join('').split('/').join('');
+    const guestId = extractQueryString('id');
 
     const dispatch = useDispatch();
 

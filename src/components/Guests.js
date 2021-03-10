@@ -4,6 +4,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { useDispatch, useSelector } from 'react-redux';
 import { types } from '../types/types';
 import { useForm } from '../hooks/useForm';
+import { filterFamiliesList } from '../helpers/filters';
 
 export const Guests = ({ families, showCopiedLink }) => {
     const dispatch = useDispatch();
@@ -26,30 +27,21 @@ export const Guests = ({ families, showCopiedLink }) => {
     const getInviteUrl = id => `${window.location.protocol}//${window.location.host}/?id=${id}`;
 
     const filter = () => dispatch({ type: types.setFiltered, payload: !filtered });
-
-    const filterName = text => new RegExp(`${name}`, 'ig').test(text);
-
-    const filterGuestName = ({ firstName, middleName, lastName, secondLastName, nickname }) => filterName(`${firstName} ${middleName} ${lastName} ${secondLastName} ${nickname}`);
     
-    const familiesView = families
-        .filter(({ familyName, guests }) => 
-            ((filtered && guests.filter(g => g.goes).length > 0) || !filtered)
-            && (
-                (name && (filterName(familyName) || guests.filter(filterGuestName).length > 0))
-                || !name
-            )
-        )
-        .map(f => ({
-            ...f,
-            guests: (name ? f.guests.filter(filterGuestName) : f.guests)
-        }))
-        .map(f => f.guests.length === 0 ? families.find(h => h.id === f.id) : f);
+    const familiesView = filterFamiliesList(families, name, filtered);
 
     const counts = {
         families: familiesView.length,
         guests: familiesView.reduce((ac, f) => ac + f.guests.length, 0),
         confirmed: familiesView.reduce((ac, f) => ac + f.guests.filter(g => g.goes).length, 0)
     };
+
+    const FullName = ({ firstName, middleName, lastName, secondLastName, nickname, goes }) => (
+        <li className={ goes ? 'yes' : 'no' }>
+            {firstName} {middleName} {lastName} {secondLastName}
+            { nickname === firstName || nickname === middleName ? '' : ` (${nickname})` }
+        </li>
+    );
 
     return (
         <>
@@ -88,11 +80,7 @@ export const Guests = ({ families, showCopiedLink }) => {
                             <div className={`admin__guests-container-row ${ calculateClass(guests) }`}>
                                 <h1>{familyName}</h1>
                                 <ul>
-                                {
-                                    guests.map(({ firstName, middleName, lastName, secondLastName, nickname, goes }) => (
-                                        <li key={ nickname } className={ goes ? 'yes' : 'no' }>({nickname}) {firstName} {middleName} {lastName} {secondLastName}</li>
-                                    ))
-                                }
+                                { guests.map((guest, i) => <FullName key={i} {...guest} />) }
                                 </ul>
                             </div>
                         </CopyToClipboard>
@@ -107,4 +95,4 @@ export const Guests = ({ families, showCopiedLink }) => {
 Guests.propTypes = {
     families: PropTypes.array.isRequired,
     showCopiedLink: PropTypes.func.isRequired
-}
+};

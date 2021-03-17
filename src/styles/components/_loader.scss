@@ -5,12 +5,12 @@
     bottom: 0;
     right: 0;
     z-index: 99;
-    background-image: url(../../assets/load.gif);
+    background-image: url(../../assets/load.webp);
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: cover;
-    background-color: #ffb911;
+    background-size: 50% auto;
+    background-color: #7dffd5;
 
     &.no-pointer {
         pointer-events: none;

@@ -24,7 +24,7 @@ export const Guests = ({ families, showCopiedLink }) => {
         return 'mix';
     };
 
-    const getInviteUrl = id => `${window.location.protocol}//${window.location.host}/?id=${id}`;
+    const getInviteUrl = id => `${window.location.href.replace(window.location.search, '')}?id=${id}`;
 
     const filter = () => dispatch({ type: types.setFiltered, payload: !filtered });
     

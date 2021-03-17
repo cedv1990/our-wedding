@@ -7,19 +7,16 @@ export const Loader = () => {
 
     const { loading, initialLoadingEnded } = useSelector(state => state.ui);
 
-    if (!initialLoadingEnded) {
-        setTimeout(() => {
-            const className = !loading ? 'animate__animated animate__fadeOut animate__faster' : '';
-            const loader = document.querySelector('.loader');
-            if (initialLoadingEnded || !loader) return;
-            loader.className = `loader ${ className } no-pointer`;
-            dispatch( finishInitialLoading() );
-        }, 2000);
+    let className = 'loader ';
 
-        return (
-            <div className='loader'>
-            </div>
-        );
+    if (!initialLoadingEnded) {
+        setTimeout(() => dispatch( finishInitialLoading() ), 2000);
+    } else if (!loading) {
+        className += 'animate__animated animate__fadeOut animate__faster no-pointer';
     }
-    return (<></>);
+    
+    return (
+        <div className={className}>
+        </div>
+    );
 }

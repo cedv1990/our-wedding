@@ -5,13 +5,13 @@ import { finishInitialLoading } from '../actions/ui';
 export const Loader = () => {
     const dispatch = useDispatch();
 
-    const { loading, initialLoadingEnded } = useSelector(state => state.ui);
+    const { loading, initialLoadingEnded, showForm } = useSelector(state => state.ui);
 
     let className = 'loader ';
 
     if (!initialLoadingEnded) {
         setTimeout(() => dispatch( finishInitialLoading() ), 2000);
-    } else if (!loading) {
+    } else if (!loading || showForm) {
         className += 'animate__animated animate__fadeOut animate__faster no-pointer';
     }
     

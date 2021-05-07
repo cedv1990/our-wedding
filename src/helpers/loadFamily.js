@@ -18,9 +18,9 @@ export const loadFamilyData = async familyId => {
 };
 
 export const loadFamilies = async () => {
-    if (process.env.NODE_ENV === 'development') {
-        return JSON.parse(localStorage.getItem('guests'));
-    }
+    // if (process.env.NODE_ENV === 'development') {
+    //     return JSON.parse(localStorage.getItem('guests'));
+    // }
 
     const familiesData = [];
     const familyRef = (await db.collection('families').get()).docs;
@@ -32,14 +32,15 @@ export const loadFamilies = async () => {
         const guestsRef = (await db.collection(`families/${family.id}/guests`).get()).docs;
 
         for (let guest of guestsRef) {
-            const { first_name: firstName, middle_name: middleName, last_name: lastName, second_last_name: secondLastName, nickname, goes } = guest.data();
+            const { first_name: firstName, middle_name: middleName, last_name: lastName, second_last_name: secondLastName, nickname, goes, vehicle } = guest.data();
             guests.push({
                 firstName,
                 middleName,
                 lastName,
                 secondLastName,
                 nickname,
-                goes 
+                goes,
+                vehicle
             });
         }
 

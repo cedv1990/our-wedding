@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { types } from '../types/types';
 import { useForm } from '../hooks/useForm';
 import { filterFamiliesList } from '../helpers/filters';
+import { CopyDataToClipboard } from './CopyDataToClipboard';
+import { formatName } from '../helpers/formatName';
 
 export const Guests = ({ families, showCopiedLink }) => {
     const dispatch = useDispatch();
@@ -33,13 +35,13 @@ export const Guests = ({ families, showCopiedLink }) => {
     const counts = {
         families: familiesView.length,
         guests: familiesView.reduce((ac, f) => ac + f.guests.length, 0),
-        confirmed: familiesView.reduce((ac, f) => ac + f.guests.filter(g => g.goes).length, 0)
+        confirmed: familiesView.reduce((ac, f) => ac + f.guests.filter(g => g.goes).length, 0),
+        bus: familiesView.reduce((ac, f) => ac + f.guests.filter(g => g.goes && !g.vehicle).length, 0)
     };
 
-    const FullName = ({ firstName, middleName, lastName, secondLastName, nickname, goes }) => (
-        <li className={ goes ? 'yes' : 'no' }>
-            {firstName} {middleName} {lastName} {secondLastName}
-            { nickname === firstName || nickname === middleName ? '' : ` (${nickname})` }
+    const FullName = (data) => (
+        <li className={ `${data.goes ? 'yes' : 'no'}${data.goes && !data.vehicle ? ' bus' : ''}` }>
+            {formatName(data)}
         </li>
     );
 
@@ -66,6 +68,12 @@ export const Guests = ({ families, showCopiedLink }) => {
                     onClick={filter}
                 >
                     <strong>Confirmados:</strong> { counts.confirmed }
+                </div>
+                <div><strong>Bus:</strong> { counts.bus }</div>
+            </div>
+            <div className="admin__guests-copy">
+                <div className="input">
+                    <CopyDataToClipboard />
                 </div>
             </div>
             <div className="admin__guests-container">

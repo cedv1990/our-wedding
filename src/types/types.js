@@ -12,7 +12,7 @@ export const types = {
 
     familyLoad: '[FAMILY] load family data',
     
-    guestGoesUpdate: '[GUESTS] update family guest if goes',
+    guestFieldUpdate: '[GUESTS] update family guest if goes/bus',
 
     familiesLoad: '[FAMILIES] load all guests',
 

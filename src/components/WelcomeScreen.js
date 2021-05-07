@@ -1,13 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setShowForm } from '../actions/ui';
+import { ConfirmButton } from './confirm/ConfirmButton';
+import { Location } from './Location';
 
 export const WelcomeScreen = () => {
     const dispatch = useDispatch();
-
-    const handleClickMap = () => {
-        window.open('https://goo.gl/maps/XkoCP9FdpzKGYFE37', '_blank');
-    }
 
     const { family } = useSelector(state => state.family);
 
@@ -63,24 +61,12 @@ export const WelcomeScreen = () => {
                 </div>
                 <div className="cute">Julio</div>
             </div>
-            <div 
-                className="location"
-                onClick={ handleClickMap }
-            >
-                <i className="fas fa-map-marked-alt"></i>
-                <br />
-                Hacienda San Sebastián, Kilómetro 3, vía El Rosal - Subachoque
-            </div>
-            {
-                valid > 0 && 
-                (
-                    <div className="buttons">
-                        <button onClick={ handleShowForm } disabled={ loading }>
-                            Confirmar asistencia
-                        </button>
-                    </div>
-                )
-            }
+            <ConfirmButton
+                valid={ valid > 0 }
+                handleShowForm={ handleShowForm }
+                disabled={ loading }
+            />
+            <Location />
         </aside>
     )
 }

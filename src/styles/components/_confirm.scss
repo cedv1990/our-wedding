@@ -12,8 +12,22 @@
         margin: 20px 0;
     }
 
+    .bus-info,
     .description {
         width: 80vw;
+    }
+
+    .bus-info {
+        padding: 0 10px;
+        margin: 0;
+        font-size: .8rem;
+
+        strong {
+            font-size: 1.1rem;
+        }
+    }
+
+    .description {
         display: flex;
         flex-direction: column;
         text-align: center;
@@ -43,15 +57,37 @@
 
         > div {
             display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
+            flex-direction: column;
             padding: 10px;
             border-radius: 10px;
             background-color: rgba(113, 113, 113, 0.5);
-            align-items: center;
             margin: 10px;
             font-size: 1.5rem;
+
+            > div {
+                flex: 1;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }
+
+        .bus-question {
+            border-top: 1px dotted rgba(155, 155, 155, 0.5);
+            padding-top: 10px;
+
+            * {
+                font-size: .8rem !important;
+            }
+
+            label {
+                padding-right: 6px;
+
+                span.MuiTypography-root.MuiFormControlLabel-label.MuiTypography-body1 {
+                    margin-right: 18px;
+                }
+            }
         }
 
         .name {
@@ -71,6 +107,7 @@
     }
 
     @media (min-width: 1000px) {
+        .bus-info,
         form {
             width: 50vw;
         }

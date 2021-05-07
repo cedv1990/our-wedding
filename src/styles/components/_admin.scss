@@ -59,7 +59,7 @@ $not-goes: rgb(255, 119, 119);
             font-size: 1.1rem;
             margin-bottom: 15px;
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             align-items: center;
             strong {
                 font-weight: bolder !important;
@@ -78,6 +78,21 @@ $not-goes: rgb(255, 119, 119);
                     width: 100%;
                     margin-bottom: 15px;
                 }
+            }
+        }
+
+        &-copy {
+            width: calc(100% - 100px);
+            padding: 0 15px;
+            margin-bottom: 15px;
+
+            textarea {
+                position: fixed;
+                top: -1000px;
+            }
+
+            .copied {
+                background-color: #36aa00;
             }
         }
 
@@ -137,12 +152,22 @@ $not-goes: rgb(255, 119, 119);
                     padding: 0;
                     list-style-type: none;
 
+                    li {
+                        position: relative;
+                    }
+
                     li.yes::before {
                         content: '😊';
                     }
 
                     li.no::before {
                         content: '🥺';
+                    }
+
+                    li.bus::after {
+                        content: '🚌';
+                        position: absolute;
+                        right: 0
                     }
                 }
 

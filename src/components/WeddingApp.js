@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { startLoadingFamilyData } from '../actions/family';
 
-import { ConfirmScreen } from './ConfirmScreen';
+import { ConfirmScreen } from './confirm/ConfirmScreen';
 import { Frame } from './Frame';
 import { Loader } from './Loader';
 import { WelcomeScreen } from './WelcomeScreen';

@@ -15,18 +15,19 @@ export const setFamily = guest => ({
     payload: guest
 });
 
-export const startConfirm = (familyId, guestId, goes) => async dispatch => {
+export const startConfirm = (familyId, guestId, field, value) => async dispatch => {
     dispatch( startLoading() );
-    await db.doc(`families/${familyId}/guests/${guestId}`).update({ goes: goes });
-    dispatch(updateGoes(guestId, goes));
+    await db.doc(`families/${familyId}/guests/${guestId}`).update({ [field]: value });
+    dispatch(updateField(guestId, field, value));
     dispatch( finishLoading() );
 };
 
-export const updateGoes = (guestId, goes) => ({
-    type: types.guestGoesUpdate,
+export const updateField = (guestId, field, value) => ({
+    type: types.guestFieldUpdate,
     payload: {
         guestId,
-        goes
+        value,
+        field
     }
 });
 

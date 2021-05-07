@@ -12,12 +12,12 @@ export const familyReducer = (state = initialState, action) => {
                 ...state,
                 family: {...action.payload}
             };
-        case types.guestGoesUpdate:
+        case types.guestFieldUpdate:
             let guests = [...state.family.guests];
-            const { guestId, goes } = action.payload;
+            const { guestId, field, value } = action.payload;
             guests = guests.map(g => {
                 if (g.id === guestId) {
-                    g.goes = goes;
+                    g[field] = value;
                 }
                 return g;
             });

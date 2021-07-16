@@ -10,7 +10,7 @@ export const CopyDataToClipboard = () => {
 
         return families.reduce((ac, { familyName, guests }) => {
             guests.forEach(guest => 
-                ac.push(`${formatName(guest)}\t${confirm(guest.goes)}\t${confirm(guest.goes && !guests.vehicle)}\n`)
+                ac.push(`${formatName(guest)}\t${confirm(guest.goes)}\t${confirm(guest.goes && !guest.vehicle)}\n`)
             );
             return ac;
         }, []).join('');
